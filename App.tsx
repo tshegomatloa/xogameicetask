@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableHighlight } from 'react-native';
 
-// NavigationContainer wraps the whole app and manages navigation state
-import { NavigationContainer } from 'react-navigation/native';
-// createNativeStackNavigator builds a stack-based navigator using native transitions
-import { createNativeStackNavigator } from 'react-navigation/';
+
+import { NavigationContainer } from '@react-navigation/native';
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,8 +45,7 @@ function GameScreen({ navigation, route} : any){
   const { player1, player2 } = route.params; 
   const [player1Turn, setPlayer1Turn] = useState<boolean>(true);
 
-  // Each block holds one of three values:
-  // 0 - not yet played | 1 - Player 1 played here | 2 - Player 2 played here
+  
   const [block1, setBlock1] = useState<number>(0);
   const [block2, setBlock2] = useState<number>(0);
   const [block3, setBlock3] = useState<number>(0);
@@ -57,7 +56,7 @@ function GameScreen({ navigation, route} : any){
   const [block8, setBlock8] = useState<number>(0);
   const [block9, setBlock9] = useState<number>(0);
 
-  // Decide what block's tile should display, based on its current value
+ 
   const contentFor = (block: number): string => {
     switch (block) {
       case 1:
@@ -80,9 +79,9 @@ function GameScreen({ navigation, route} : any){
 const handlePress = (block: number, setBlock: (value: number) => void) => {
     if (winner !== 0) return; // stop game after winner is chosen
 
-    // how do we stop the user from pressing the same button twice? 
+    
     if (block !== 0) {
-      return; // tile already played
+      return; 
     }
     player1Turn ? setBlock(1) : setBlock(2);
 
